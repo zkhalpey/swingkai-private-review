@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0A162A" />
+<meta name="robots" content="noindex, nofollow" />
+<title>SwingKai · Private Review</title>
+<style>
+  :root{
+    --navy:#0A162A; --card:#122D55; --depth:#2A496F; --action:#25568E;
+    --sky:#A7CFE8; --text:#F0F8FF; --muted:#7EB8D9; --crimson:#9F2022;
+    --crimson-lit:#D12E30; --glass:rgba(18,45,85,.72);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;min-height:100%;background:radial-gradient(1200px 700px at 20% -10%,#16345f 0%,var(--navy) 55%,#060d18 100%);color:var(--text);font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+  button,input{font:inherit}
+  button{cursor:pointer;border:0}
+  .shell{min-height:100dvh;display:grid;place-items:center;padding:18px}
+  .phone{width:min(420px,100%);min-height:min(860px,100dvh);background:linear-gradient(180deg,rgba(18,45,85,.95),rgba(10,22,42,.98));border:1px solid rgba(167,207,232,.18);border-radius:28px;box-shadow:0 30px 80px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.08);overflow:hidden;display:flex;flex-direction:column;position:relative}
+  .phone::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 80% 18%,rgba(37,86,142,.35),transparent 28%),radial-gradient(circle at 15% 70%,rgba(159,32,34,.12),transparent 30%);pointer-events:none}
+  header{display:flex;justify-content:space-between;align-items:center;padding:18px 18px 10px;position:relative;z-index:1}
+  .logo{display:flex;gap:10px;align-items:center}
+  .logo span{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;background:linear-gradient(145deg,#25568E,#122D55);border:1px solid rgba(167,207,232,.35);box-shadow:0 8px 20px rgba(0,0,0,.25);font-weight:800}
+  .logo strong{display:block;font-size:15px}
+  .logo small{color:var(--muted);font-size:11px;letter-spacing:.04em}
+  .pill{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--sky);background:rgba(10,22,42,.55);border:1px solid rgba(167,207,232,.18);padding:6px 9px;border-radius:999px}
+  .notice{margin:0 16px 10px;padding:10px 12px;border-radius:12px;background:rgba(159,32,34,.14);border:1px solid rgba(209,46,48,.28);color:#ffd7d7;font-size:12px;position:relative;z-index:1}
+  main{flex:1;overflow:auto;padding:8px 16px 18px;position:relative;z-index:1;scrollbar-width:thin}
+  .panel{display:none;animation:in .28s ease}
+  .panel.active{display:block}
+  @keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:10px;align-items:center;background:linear-gradient(160deg,rgba(18,45,85,.92),rgba(10,22,42,.88));border:1px solid rgba(167,207,232,.16);border-radius:22px;padding:18px;box-shadow:0 16px 40px rgba(0,0,0,.22);backdrop-filter:blur(14px)}
+  .eyebrow{display:block;color:var(--sky);font-size:11px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px;font-weight:700}
+  h1{margin:0 0 10px;font-size:28px;line-height:1.08;letter-spacing:-.03em}
+  h2{margin:0 0 8px;font-size:18px}
+  p{margin:0 0 12px;color:rgba(240,248,255,.86)}
+  .primary{background:linear-gradient(180deg,#2f6fad,#25568E);color:var(--text);padding:12px 16px;border-radius:14px;font-weight:700;box-shadow:0 10px 24px rgba(37,86,142,.35)}
+  .ghost{background:rgba(10,22,42,.45);color:var(--sky);padding:10px 12px;border-radius:12px;border:1px solid rgba(167,207,232,.18)}
+  .orb{width:96px;height:96px;margin:auto;border-radius:50%;position:relative;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,rgba(167,207,232,.35),rgba(18,45,85,.2) 45%,transparent 70%)}
+  .orb .core{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-weight:800;background:linear-gradient(145deg,#25568E,#0A162A);border:1px solid rgba(167,207,232,.4);box-shadow:0 0 24px rgba(37,86,142,.55)}
+  .orb i{position:absolute;width:2px;height:46px;background:linear-gradient(var(--crimson-lit),transparent);transform-origin:bottom center;transform:rotate(28deg) translateY(-10px);border-radius:2px;box-shadow:0 0 10px rgba(209,46,48,.8)}
+  .orbit{position:absolute;inset:8px;border-radius:50%;border:1px solid rgba(167,207,232,.18);animation:spin 10s linear infinite}
+  .orbit.two{inset:20px;animation-duration:7s;border-color:rgba(159,32,34,.25)}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .cards{display:grid;gap:10px;margin-top:12px}
+  .card{background:var(--glass);border:1px solid rgba(167,207,232,.14);border-radius:18px;padding:14px;backdrop-filter:blur(12px);box-shadow:0 10px 28px rgba(0,0,0,.18)}
+  .card span{display:block;color:var(--sky);font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;margin-bottom:6px}
+  .card small,.muted{color:var(--muted)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .stat{text-align:center;padding:14px 10px}
+  .stat b{display:block;font-size:26px;color:var(--sky);line-height:1}
+  .stat em{display:block;font-style:normal;font-size:11px;color:var(--muted);margin-top:6px}
+  .quote{border-left:3px solid var(--crimson);padding:4px 0 4px 12px;color:var(--sky);font-style:italic}
+  .list{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+  .list li{background:rgba(10,22,42,.35);border:1px solid rgba(167,207,232,.12);border-radius:14px;padding:12px}
+  .list strong{display:block;margin-bottom:4px}
+  .voice{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:10px 0 0}
+  .voice audio{width:100%;height:36px}
+  .question{background:linear-gradient(180deg,rgba(18,45,85,.9),rgba(10,22,42,.8));border:1px solid rgba(167,207,232,.16);border-radius:16px;padding:14px;margin-bottom:10px}
+  .truth{font-size:12px;color:var(--muted)}
+  nav{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;padding:10px;border-top:1px solid rgba(167,207,232,.12);background:rgba(6,13,24,.72);backdrop-filter:blur(16px);position:relative;z-index:2}
+  nav button{background:transparent;color:var(--muted);padding:10px 4px;border-radius:12px;font-size:10px;letter-spacing:.04em;text-transform:uppercase;font-weight:700}
+  nav button.active{background:rgba(37,86,142,.35);color:var(--text);box-shadow:inset 0 0 0 1px rgba(167,207,232,.18)}
+  .gate{width:min(420px,100%);background:linear-gradient(180deg,rgba(18,45,85,.96),rgba(10,22,42,.98));border:1px solid rgba(167,207,232,.18);border-radius:24px;padding:24px;box-shadow:0 30px 80px rgba(0,0,0,.45)}
+  .gate label{display:block;font-size:12px;color:var(--muted);margin-bottom:8px}
+  .gate input{width:100%;padding:12px 14px;border-radius:12px;border:1px solid rgba(167,207,232,.2);background:rgba(6,13,24,.7);color:var(--text);margin-bottom:12px}
+  .error{color:#ffb4b4;font-size:13px;min-height:18px}
+  .badge{display:inline-block;padding:4px 8px;border-radius:999px;background:rgba(37,86,142,.28);color:var(--sky);font-size:11px;font-weight:700;margin-bottom:10px}
+  .score{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .score .card b{font-size:28px;color:var(--sky)}
+  @media (max-width:420px){
+    .hero{grid-template-columns:1fr}
+    .orb{width:84px;height:84px}
+    h1{font-size:26px}
+  }
+</style>
+</head>
+<body>
+<div class="shell" id="app">
+  <section class="gate" id="gate">
+    <div class="logo" style="margin-bottom:16px"><span>S</span><div><strong>SwingKai</strong><small>Private review access</small></div></div>
+    <p class="muted" style="margin-bottom:14px">Password-gated prototype for Tim Schrader and Zain Khalpey. No private training video is hosted on this page.</p>
+    <label for="pass">Review passcode</label>
+    <input id="pass" type="password" autocomplete="current-password" placeholder="Enter private passcode" />
+    <button class="primary" id="unlock" style="width:100%">Unlock review</button>
+    <div class="error" id="gateError"></div>
+    <p class="truth" style="margin-top:14px">Client-side gate for private prototype sharing. Not a substitute for formal access control on a production product.</p>
+  </section>
+
+  <div class="phone" id="product" hidden>
+    <header>
+      <div class="logo"><span>S</span><div><strong>SwingKai</strong><small>Powered by Kai Motion</small></div></div>
+      <div class="pill">Private · Review</div>
+    </header>
+    <div class="notice">Prototype only. No automated score, no unverified biomechanics, no private Tim source video on this page.</div>
+    <main>
+      <section class="panel active" data-panel="vision">
+        <div class="hero">
+          <div>
+            <span class="eyebrow">Expert intent · Deliberate practice</span>
+            <h1>Keep the coach in the loop.</h1>
+            <p>SwingKai turns a coaching concept into a short, repeatable practice sequence so the golfer can execute Tim’s intent between lessons.</p>
+            <button class="primary" data-go="method">Explore Schrader Motion</button>
+            <div class="voice">
+              <button class="ghost" id="playWelcome" type="button">Play Leo brief</button>
+              <audio id="welcomeAudio" preload="none" src="public/audio/welcome-leo.mp3"></audio>
+            </div>
+          </div>
+          <div class="orb" aria-hidden="true"><span class="orbit"></span><span class="orbit two"></span><div class="core">K</div><i></i></div>
+        </div>
+        <div class="cards">
+          <article class="card"><span>01 · Coach</span><h2>Schrader Motion</h2><p>Tim Schrader’s expert concepts, language and practice logic. Name approved by Tim. Training videos are the teaching-method source.</p></article>
+          <article class="card"><span>02 · Engine</span><h2>Kai Motion Engine</h2><p>Reusable software and future measurement substrate. Sensors speak only when the signal is proven.</p></article>
+          <article class="card"><span>03 · Economics</span><h2>Tim · 10% of proceeds</h2><p>Working commercial position: Tim receives 10% of app proceeds. The royalty instrument and full content rights still need formal writing before store release.</p></article>
+        </div>
+      </section>
+
+      <section class="panel" data-panel="method">
+        <span class="eyebrow">Approved expert layer</span>
+        <h1>Schrader Motion</h1>
+        <p class="quote">Tim’s coaching approach informs the expert practice layer. The Kai Motion Engine provides the reusable software and future measurement substrate. This distinction protects the coach, the platform and the golfer.</p>
+        <div class="cards">
+          <article class="card"><span>Practice loop</span><h2>Concept → repetition → observation</h2><p>Short 4, 6 or 8-repetition sequences with confidence before/after, notes and local review. No fabricated technique score.</p></article>
+          <article class="card"><span>Teaching method</span><h2>Training videos from Tim</h2><p>Tim is supplying the teaching-method videos. This public review page intentionally excludes those private media assets.</p></article>
+          <article class="card"><span>Boundary</span><h2>What never gets automated yet</h2><p>Validated biomechanics claims, handicap guarantees, model training on Tim’s private corpus, and any public use of Tim’s likeness without written clearance.</p></article>
+        </div>
+      </section>
+
+      <section class="panel" data-panel="science">
+        <span class="eyebrow">Evidence layer</span>
+        <h1>Scientific, not theatrical.</h1>
+        <p>The product is framed on motor-learning evidence and honest measurement limits.</p>
+        <div class="voice">
+          <button class="ghost" id="playScience" type="button">Play science brief</button>
+          <audio id="scienceAudio" preload="none" src="public/audio/science-leo.mp3"></audio>
+        </div>
+        <div class="grid2" style="margin-top:12px">
+          <article class="card stat"><b>52</b><em>RCTs in 2024 golf motor-learning review</em></article>
+          <article class="card stat"><b>PaR</b><em>Plan · Act · Review over pure repetition</em></article>
+        </div>
+        <ul class="list" style="margin-top:12px">
+          <li><strong>External focus and structured practice</strong>Barzyk &amp; Gruber 2024 found external focus, contextual interference and errorless learning superior within their strategy groups. Most studies used simple putting tasks in novices; transfer to advanced players still needs dedicated trials.</li>
+          <li><strong>Plan–Act–Review</strong>Lee &amp; Schmidt argue that practice which over-emphasises endless swings under-trains planning and review. SwingKai operationalises that loop.</li>
+          <li><strong>Face angle priority</strong>Instructional and lab-facing sources treat face angle at impact as the dominant start-line variable. That is an observation priority, not a licence for an automated score.</li>
+          <li><strong>Sensors later</strong>IMU and markerless tools are candidates only after pre-specified error bounds, missingness and reliability tests. No 800 Hz or “proven improvement” claims until measured on device.</li>
+        </ul>
+        <p class="truth">Primary sources: Barzyk &amp; Gruber, Front Sports Act Living 2024 (PMID 38419912); Lee &amp; Schmidt, Int J Golf Sci 2014; public putting-mechanics synthesis for face, impact, tempo and launch framing.</p>
+      </section>
+
+      <section class="panel" data-panel="score">
+        <span class="eyebrow">Honest appraisal</span>
+        <h1>Where it stands today</h1>
+        <p>You asked for 9/10 or 4.8/5. I will not invent that. Here is the real scorecard and the route to that bar.</p>
+        <div class="score">
+          <article class="card"><span>Current overall</span><b>7.4 / 10</b><p class="muted">≈ 3.7 / 5 stars as a private prototype</p></article>
+          <article class="card"><span>Target</span><b>9.0 / 10</b><p class="muted">4.8 / 5 after evidence and native gates</p></article>
+        </div>
+        <ul class="list" style="margin-top:12px">
+          <li><strong>Product concept 9.0</strong>Coach-to-practice OS is the right wedge. Differentiated and scientifically aligned.</li>
+          <li><strong>Experience / UI 8.4</strong>Kai Palette glass, mobile frame, clear claims boundary, guided practice path.</li>
+          <li><strong>Engineering reliability 8.6</strong>Typecheck, lint, 13 privacy tests, 6 desktop/mobile E2E tests pass on the local alpha.</li>
+          <li><strong>Scientific trust 7.2</strong>Evidence framing is present; no peer-validated product outcome data yet.</li>
+          <li><strong>Content rights / commercial 6.5</strong>Name and 10% intent locked verbally; written licence and royalty instrument still open.</li>
+          <li><strong>Native / Watch 5.0</strong>Swift scaffold and Xcode project exist; no on-device capture validation yet.</li>
+          <li><strong>Market proof 4.5</strong>No authorised user cohort, retention or outcome data.</li>
+        </ul>
+        <article class="card" style="margin-top:12px">
+          <span>Path to 9.0 / 4.8★</span>
+          <ol class="list">
+            <li>Written Tim rights + 10% royalty instrument</li>
+            <li>Hosted private review with Tim feedback closed-loop</li>
+            <li>Apple Watch capture reliability measured on device</li>
+            <li>10–20 authorised practice sessions with adherence data</li>
+            <li>No score until a pre-specified measurement passes its own falsification test</li>
+          </ol>
+        </article>
+      </section>
+
+      <section class="panel" data-panel="feedback">
+        <span class="eyebrow">Tim’s review</span>
+        <h1>Four blunt questions</h1>
+        <div class="question">1. Does this preserve the way you actually coach?</div>
+        <div class="question">2. Which part would be most useful between lessons?</div>
+        <div class="question">3. What should never be automated or simplified?</div>
+        <div class="question">4. Is the “Schrader Motion” framing and 10% proceeds position written the way you want it publicly described?</div>
+        <p class="truth">This page is the private edition. Full interactive alpha remains local until Tim’s training videos and rights package are integrated under written terms.</p>
+        <div class="cards">
+          <article class="card"><span>Shareable now</span><h2>This review URL</h2><p>Password-gated, source-safe, mobile-first. Suitable for text or email.</p></article>
+          <article class="card"><span>Local alpha</span><h2>Session engine</h2><p>Unlock, catalogue, guided reps, export and purge already verified on desktop and 390×844 mobile.</p></article>
+        </div>
+      </section>
+    </main>
+    <nav>
+      <button class="active" data-tab="vision">Vision</button>
+      <button data-tab="method">Motion</button>
+      <button data-tab="science">Science</button>
+      <button data-tab="score">Score</button>
+      <button data-tab="feedback">Tim</button>
+    </nav>
+  </div>
+</div>
+<script>
+const PASS_SHA = "0a11f37d9912c5e33c4d7124c6b763fd022bd1efa08b1dd2e711b2b2320c19f2";
+// Real hash computed at deploy time is injected below by build step if present.
+async function sha256(text){
+  const data = new TextEncoder().encode(text);
+  const buf = await crypto.subtle.digest("SHA-256", data);
+  return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,"0")).join("");
+}
+
+const gate = document.getElementById("gate");
+const product = document.getElementById("product");
+const error = document.getElementById("gateError");
+const pass = document.getElementById("pass");
+
+async function unlock(){
+  const value = pass.value.trim();
+  try{
+    const h = await sha256(value);
+    if(h === PASS_SHA){
+      sessionStorage.setItem("swingkai_review_ok","1");
+      gate.hidden = true; product.hidden = false; return;
+    }
+  }catch(_){}
+  error.textContent = "Incorrect passcode.";
+}
+
+document.getElementById("unlock").addEventListener("click", unlock);
+pass.addEventListener("keydown", e=>{ if(e.key==="Enter") unlock(); });
+if(sessionStorage.getItem("swingkai_review_ok")==="1"){ gate.hidden = true; product.hidden = false; }
+
+document.querySelectorAll("nav [data-tab]").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    document.querySelectorAll("nav [data-tab]").forEach(b=>b.classList.remove("active"));
+    document.querySelectorAll(".panel").forEach(p=>p.classList.remove("active"));
+    btn.classList.add("active");
+    document.querySelector(`.panel[data-panel="${btn.dataset.tab}"]`).classList.add("active");
+  });
+});
+document.querySelectorAll("[data-go]").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    const tab = btn.dataset.go;
+    document.querySelector(`nav [data-tab="${tab}"]`)?.click();
+  });
+});
+document.getElementById("playWelcome").addEventListener("click",()=>{
+  const a = document.getElementById("welcomeAudio"); a.currentTime=0; a.play();
+});
+document.getElementById("playScience").addEventListener("click",()=>{
+  const a = document.getElementById("scienceAudio"); a.currentTime=0; a.play();
+});
+</script>
+</body>
+</html>

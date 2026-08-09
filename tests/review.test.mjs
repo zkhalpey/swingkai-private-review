@@ -43,3 +43,19 @@ test('demo includes working state-machine hooks without claiming measurement', (
   assert.match(html, /No force score from phone video/);
   assert.doesNotMatch(html, /AI swing score|validated technique score|handicap improvement guaranteed/i);
 });
+
+test('mobile preview is installable as a standalone PWA', async () => {
+  assert.match(html, /<link rel="manifest" href="\.\/manifest\.webmanifest">/);
+  assert.match(html, /<link rel="apple-touch-icon" href="\.\/icons\/apple-touch-icon\.png">/);
+  assert.match(html, /navigator\.serviceWorker\.register\('\.\/sw\.js'\)/);
+
+  const manifest = JSON.parse(await readFile(new URL('../manifest.webmanifest', import.meta.url), 'utf8'));
+  assert.equal(manifest.name, 'SwingKai');
+  assert.equal(manifest.display, 'standalone');
+  assert.equal(manifest.start_url, './');
+  assert.deepEqual(manifest.icons.map(icon => icon.sizes), ['192x192', '512x512']);
+
+  const serviceWorker = await readFile(new URL('../sw.js', import.meta.url), 'utf8');
+  assert.match(serviceWorker, /manifest\.webmanifest/);
+  assert.doesNotMatch(serviceWorker, /source-intake|api\//i);
+});

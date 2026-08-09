@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#071222">
 <meta name="robots" content="noindex,nofollow">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SwingKai">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
 <title>SwingKai · Product Preview</title>
 <style>
 :root{--ink:#071222;--navy:#0a162a;--card:#122d55;--blue:#25568e;--sky:#a7cfe8;--white:#f0f8ff;--muted:#7eb8d9;--green:#80d4a9;--amber:#efc078;--line:rgba(167,207,232,.16);--glass:rgba(18,45,85,.82)}
@@ -138,6 +143,7 @@ document.querySelector('[data-action="start-plan"]').addEventListener('click',()
 document.querySelector('[data-action="begin-reps"]').addEventListener('click',()=>{reps=0;repCount.textContent='0';repRing.style.setProperty('--rep-progress','0%');planView.hidden=true;repView.hidden=false;completeView.hidden=true;viewport.scrollTop=0});
 document.querySelector('[data-action="complete-rep"]').addEventListener('click',()=>{reps=Math.min(8,reps+1);repCount.textContent=String(reps);repRing.style.setProperty('--rep-progress',`${reps/8*100}%`);if(reps===8){repView.hidden=true;completeView.hidden=false;document.getElementById('weeklyReps').textContent='32';document.getElementById('todayBar').style.height='94%';viewport.scrollTop=0}});
 document.querySelector('[data-action="reset-session"]').addEventListener('click',()=>{planView.hidden=false;repView.hidden=true;completeView.hidden=true;viewport.scrollTop=0});
+if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js'))}
 </script>
 </body>
 </html>

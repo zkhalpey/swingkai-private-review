@@ -25,15 +25,31 @@ test('App Store demo exposes a complete golfer journey', () => {
   }
 });
 
+test('demo restores clip-derived visuals and an evidence layer', () => {
+  for (const marker of [
+    'data-visual="ground-interaction"',
+    'data-visual="base-platform"',
+    'data-visual="club-position"',
+    'data-visual="kinematic-sequence"',
+    'Original SwingKai motion study',
+    'Science behind the cue',
+    'PMID 41653371',
+    'PMID 35736831',
+    'PMID 38419912',
+    'Supported principle',
+    'Coach hypothesis',
+  ]) assert.match(html, new RegExp(marker));
+});
+
 test('public review contains no private Tim media', () => {
   assert.doesNotMatch(html, /<video\b/i);
   assert.doesNotMatch(html, /source-intake|20260613_|20260808_|20210427_|20260801_|20260728_/i);
 });
 
-test('review keeps the four-tab product navigation contract', () => {
+test('review keeps the five-tab product navigation contract', () => {
   const nav = html.match(/<nav[^>]*>([\s\S]*?)<\/nav>/)?.[1] ?? '';
   const tabs = [...nav.matchAll(/data-tab="([^"]+)"/g)].map((match) => match[1]);
-  assert.deepEqual(tabs, ['home', 'practice', 'progress', 'coach']);
+  assert.deepEqual(tabs, ['home', 'practice', 'science', 'progress', 'coach']);
 });
 
 test('demo includes working state-machine hooks without claiming measurement', () => {

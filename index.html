@@ -41,36 +41,52 @@ h1{font-size:34px;line-height:1.06;letter-spacing:-1.15px;margin:5px 0 10px}h2{f
 .gate{width:min(400px,100%);padding:28px;border-radius:28px;background:rgba(10,22,42,.96);border:1px solid var(--line);box-shadow:0 35px 100px rgba(0,0,0,.62)}.gate h1{font-size:32px}.gate label{display:block;color:var(--muted);font-size:12px;margin:21px 0 8px}.gate input{width:100%;height:50px;padding:0 15px;color:var(--white);background:#071222;border:1px solid rgba(167,207,232,.25);border-radius:14px;margin-bottom:11px}.gate-error{min-height:20px;color:#ffb7b7;font-size:12px;margin:8px 0}.gate .tiny{margin-top:13px}
 @media(max-width:480px){.stage{padding:0}.device{width:100%;height:100dvh;min-height:620px;border:0;border-radius:0}.screen{padding-left:17px;padding-right:17px}.topbar{padding-top:max(12px,env(safe-area-inset-top));height:calc(61px + env(safe-area-inset-top))}.gate{width:100%;min-height:100dvh;border:0;border-radius:0;display:flex;flex-direction:column;justify-content:center;padding:26px}}
 @media(min-width:700px){.device{width:430px}}
+.pills{display:flex;gap:7px;margin:4px 0 14px;overflow-x:auto;scrollbar-width:none}.pills::-webkit-scrollbar{display:none}.pill{flex:0 0 auto;padding:8px 13px;border-radius:999px;border:1px solid var(--line);background:rgba(37,86,142,.22);color:var(--sky);font-size:12px;font-weight:600}.pill.active{background:var(--white);color:var(--navy);border-color:var(--white)}.pill.locked{opacity:.45}.pill.done{border-color:rgba(128,212,169,.5)}
+.stage-focus{font-size:12px;color:var(--muted);margin:-6px 0 12px}
+.plan-step{cursor:pointer;border-radius:14px;padding:12px 8px}.plan-step.selected{background:rgba(37,86,142,.28)}.plan-step.selected .step-no{background:var(--white);color:var(--navy)}
+.choice-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(70px,1fr));gap:7px;margin:8px 0 14px}.choice{min-height:40px;padding:8px 6px;border-radius:12px;border:1px solid var(--line);background:rgba(37,86,142,.22);color:var(--sky);font-size:12px;font-weight:600}.choice.active{background:var(--white);color:var(--navy);border-color:var(--white)}
+.label{display:block;color:var(--muted);font-size:11px;font-weight:650;letter-spacing:.08em;text-transform:uppercase;margin:12px 0 4px}
+.rating{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin:4px 0 6px}.rating button{min-height:38px;border-radius:10px;border:1px solid var(--line);background:rgba(37,86,142,.22);color:var(--sky);font-weight:600}.rating button.active{background:var(--sky);color:var(--navy)}
+textarea.field,input.field,select.field{width:100%;min-height:44px;padding:10px 12px;color:var(--white);background:#071222;border:1px solid rgba(167,207,232,.25);border-radius:12px;font:inherit;resize:vertical}select.field{appearance:none}
+.log{display:grid;gap:8px}.log-item{display:grid;grid-template-columns:1fr auto;gap:8px;padding:11px 13px;border-radius:14px;background:var(--glass);border:1px solid var(--line);font-size:12px}.log-item b{display:block;font-size:13px}.log-item .tiny{text-align:right}.log-item q{display:block;grid-column:1/-1;color:rgba(240,248,255,.78);font-style:italic}
+.empty{padding:22px 16px;border-radius:16px;border:1px dashed rgba(167,207,232,.3);text-align:center;color:var(--muted);font-size:13px}
+.role-switch{display:flex;gap:4px;padding:3px;border-radius:999px;background:rgba(37,86,142,.3);border:1px solid var(--line)}.role-switch button{padding:6px 10px;border-radius:999px;background:none;color:var(--muted);font-size:11px;font-weight:650}.role-switch button.active{background:var(--white);color:var(--navy)}
+.ledger{display:grid;gap:8px}.ledger-row{display:flex;align-items:center;gap:11px;padding:11px 13px;border-radius:14px;background:var(--glass);border:1px solid var(--line)}.ledger-row i{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:12px;font-weight:700;background:rgba(37,86,142,.5);color:var(--sky);flex:0 0 auto}.ledger-row.done i{background:var(--green);color:var(--navy)}.ledger-row.current i{background:var(--white);color:var(--navy)}.ledger-row p{margin:0;font-size:12px}.ledger-row .tiny{margin-left:auto;white-space:nowrap}
+.coach-only[hidden]{display:none!important}.cue-quote{font-size:17px;font-weight:600;letter-spacing:-.2px;margin:8px 0 10px;color:var(--white)}
+.module-group{margin:14px 0 4px}.module-group h3{font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;font-weight:650;margin:0 0 8px}
+.saved{color:var(--green);font-size:12px;min-height:16px;margin-top:6px}
+.strip-mini{display:flex;gap:6px;margin:8px 0}.strip-mini span{font-size:10px;padding:4px 7px;border-radius:999px;background:rgba(167,207,232,.1);color:var(--sky)}
 </style>
 </head>
 <body>
 <div class="stage">
   <section class="gate" id="gate">
-    <div class="brand"><span class="mark">S</span><div><b>SwingKai</b><small>Product preview</small></div></div>
-    <h1>Meet your coach between lessons.</h1>
-    <p>A private, interactive preview of the golfer experience. No Tim source video is hosted here.</p>
+    <div class="brand"><span class="mark">S</span><div><b>SwingKai</b><small>Private review · Kinetic Swing System</small></div></div>
+    <h1>Your coaching, between lessons.</h1>
+    <p>A private, interactive review of the SwingKai golfer and coach experience, built around Tim Schrader’s Kinetic Swing System. No Tim source video is hosted here.</p>
     <label for="passcode">Review passcode</label>
     <input id="passcode" type="password" autocomplete="current-password" placeholder="Enter passcode">
     <button class="primary" id="unlock">Open SwingKai</button>
     <div class="gate-error" id="gateError" role="alert"></div>
-    <p class="tiny">Presentation gate only. The production app will use proper account authentication.</p>
+    <p class="tiny">Presentation gate only. The production app will use proper account authentication. Everything you enter stays on this device.</p>
   </section>
 
   <section class="device" id="product" hidden>
     <header class="topbar">
       <div class="brand"><span class="mark">S</span><div><b>SwingKai</b><small>Powered by Kai Motion</small></div></div>
-      <div class="avatar">ZK</div>
+      <div class="role-switch" role="tablist" aria-label="View as"><button class="active" data-role="golfer">Golfer</button><button data-role="coach">Coach</button></div>
     </header>
     <main class="viewport" id="viewport">
+
       <section class="screen active" data-screen="home">
-        <span class="overline">Sunday · 7:00 AM lesson</span>
-        <h1>Good morning, Zain</h1>
-        <p>Tim added a new movement sequence for you.</p>
+        <span class="overline" id="homeOverline">Today</span>
+        <h1 id="greeting">Good morning, Zain</h1>
+        <p id="homeSub">Tim set today’s cue for you.</p>
         <article class="hero">
           <span class="overline">Today’s focus</span>
-          <h1>Build from the ground up.</h1>
-          <p>Find your base, organise the feet and feel stable pressure before the club moves.</p>
-          <div class="session-meta"><span class="chip">8 reps</span><span class="chip">6 min</span><span class="chip">7 iron</span></div>
+          <h1 id="heroTitle">Own the ground.</h1>
+          <p id="heroPromise">Notice where pressure travels before the club moves.</p>
+          <div class="session-meta" id="heroMeta"></div>
           <button class="primary" data-action="start-plan">Start today’s session</button>
           <div class="motion-hero" aria-hidden="true">
             <svg viewBox="0 0 185 225" role="img">
@@ -85,56 +101,65 @@ h1{font-size:34px;line-height:1.06;letter-spacing:-1.15px;margin:5px 0 10px}h2{f
             </svg>
           </div>
         </article>
-        <div class="section-head"><h2>From Tim’s latest lesson</h2><button data-go="science">See science</button></div>
+        <div class="section-head"><h2>From Tim’s method</h2><button data-go="science">See science</button></div>
         <div class="visual-strip" aria-label="Original SwingKai visual studies">
           <article class="visual-card" data-visual="ground-interaction">
             <div class="visual-scene"><div class="force-floor"></div><div class="force-feet"><i class="force-foot"></i><i class="force-foot"></i></div><div class="force-vectors"><i></i><i></i></div></div>
-            <div class="visual-copy"><span class="visual-tag">Original SwingKai motion study</span><h3>Ground interaction</h3><p>Clip-derived teaching sequence: stable feet, press down, feel the ground respond. This is a cue, not a force measurement.</p></div>
+            <div class="visual-copy"><span class="visual-tag">Original SwingKai motion study</span><h3>Ground interaction</h3><p>Stable feet, press down, feel the ground respond. A feel cue you can rehearse anywhere.</p></div>
           </article>
           <article class="visual-card" data-visual="base-platform">
             <div class="visual-scene"><div class="platform-track"><i class="walk-foot one"></i><i class="walk-foot two"></i></div></div>
-            <div class="visual-copy"><span class="visual-tag">Walk-in drill</span><h3>Personalised base platform</h3><p>Step into the prescribed silhouette, organise stance width and repeat. The dimensions remain golfer-specific.</p></div>
+            <div class="visual-copy"><span class="visual-tag">Walk-in drill</span><h3>Personalised base platform</h3><p>Step into your silhouette, organise stance width and repeat. The dimensions are yours, not a template.</p></div>
           </article>
           <article class="visual-card" data-visual="club-position">
             <div class="visual-scene"><i class="club-sweep"></i><div class="club-line"><i class="club-ball wedge"></i><i class="club-ball iron"></i><i class="club-ball wood"></i><i class="club-ball driver"></i></div><div class="club-labels"><span>Wedge</span><span>Iron</span><span>Wood</span><span>Driver</span></div></div>
-            <div class="visual-copy"><span class="visual-tag">Setup continuum</span><h3>Club-position baseline</h3><p>Shorter clubs nearer centre, then progressively forward. Shot intent and trajectory still govern the final position.</p></div>
+            <div class="visual-copy"><span class="visual-tag">Setup continuum</span><h3>Club-position baseline</h3><p>Shorter clubs nearer centre, then progressively forward. Shot intent and trajectory govern the final position.</p></div>
           </article>
           <article class="visual-card" data-visual="kinematic-sequence">
             <div class="visual-scene"><svg class="sequence-svg" viewBox="0 0 280 130" aria-label="Illustrative segment curves"><line class="impact" x1="230" y1="10" x2="230" y2="118"/><path class="curve hips" d="M10 110 C40 108 48 35 90 43 C118 49 130 98 168 108"/><path class="curve torso" d="M25 112 C70 108 78 25 122 37 C155 46 158 98 202 108"/><path class="curve arms" d="M40 114 C100 111 112 19 155 32 C193 43 190 101 238 109"/><path class="curve club" d="M65 116 C130 114 165 104 196 21 C216 58 224 91 247 110"/></svg></div>
-            <div class="visual-copy"><span class="visual-tag">Illustrative curves</span><h3>Sequence, then speed</h3><p>Segment peaks can occur in sequence, but the app will not impose universal target curves or invented efficiency percentages.</p></div>
+            <div class="visual-copy"><span class="visual-tag">Illustrative curves</span><h3>Sequence, then speed</h3><p>Pelvis, torso, arms, club. Train the order before chasing a bigger number.</p></div>
           </article>
         </div>
         <div class="section-head"><h2>Your week</h2><button data-go="progress">View progress</button></div>
         <div class="grid">
-          <article class="card metric"><b>3</b><small>practice days</small></article>
-          <article class="card metric"><b>24</b><small>guided reps</small></article>
-          <article class="card full lesson-row"><div class="lesson-icon">↗</div><div><span class="overline"><i class="status-dot"></i>Coach update</span><h3>New from Tim</h3><p>Ground interaction and personalised club position added today.</p></div></article>
+          <article class="card metric"><b id="homeDays">0</b><small>practice days</small></article>
+          <article class="card metric"><b id="homeReps">0</b><small id="homeRepsLabel">guided reps</small></article>
+          <article class="card full lesson-row"><div class="lesson-icon">↗</div><div><span class="overline"><i class="status-dot"></i>Coach update</span><h3>From Tim</h3><p id="homeCoachNote"></p></div></article>
         </div>
       </section>
 
       <section class="screen" data-screen="practice">
         <div id="planView">
-          <div class="plan-title"><span class="overline">Your lesson plan</span><h1>Kinetic Swing System</h1><p>One cue at a time. Feel it, repeat it, then record what you noticed.</p></div>
-          <div class="plan-step"><div class="step-no">01</div><div><h3>Personalised base platform</h3><p>Set a balanced stance for the club and shot you intend to play.</p></div></div>
-          <div class="plan-step"><div class="step-no">02</div><div><h3>Three-arch foot tripod</h3><p>Notice heel, base of the big toe and base of the little toe.</p></div></div>
-          <div class="plan-step"><div class="step-no">03</div><div><h3>Ground interaction</h3><p>Press down. The ground pushes up. Stay stable rather than chasing force.</p></div></div>
-          <div class="plan-step"><div class="step-no">04</div><div><h3>Club-position baseline</h3><p>Use Tim’s starting position, then adapt it to the shot.</p></div></div>
+          <div class="plan-title"><span class="overline">Your lesson plan</span><h1>Kinetic Swing System</h1><p>Base, Control, Sequence, Transfer. One cue at a time. Feel it, repeat it, then record what you noticed.</p></div>
+          <div class="pills" id="stagePills"></div>
+          <p class="stage-focus" id="stageFocus"></p>
+          <div id="moduleList"></div>
+          <span class="label">Practice mode</span>
+          <div class="choice-row" id="modeRow"></div>
+          <span class="label">Repetitions</span>
+          <div class="choice-row" id="repRow"></div>
           <div class="boundary">Coach-guided practice. No force score from phone video. Force and pressure need suitable instrumentation.</div>
-          <button class="primary" data-action="begin-reps">Begin 8 guided reps</button>
+          <button class="primary" data-action="begin-reps" id="beginBtn">Begin 8 guided reps</button>
         </div>
         <div id="repView" hidden>
-          <div class="practice-head"><span class="overline">Guided practice</span><h1>Feel the floor.</h1><p>Reset your feet before every repetition.</p></div>
+          <div class="practice-head"><span class="overline" id="repMode">Guided practice</span><h1 id="repTitle">Feel the floor.</h1><p id="repInstruction">Reset your feet before every repetition.</p></div>
           <div class="feet" aria-hidden="true"><div class="foot"><i class="point heel"></i><i class="point big"></i><i class="point little"></i></div><div class="foot right"><i class="point heel"></i><i class="point big"></i><i class="point little"></i></div></div>
-          <div class="cue">Press down. The ground pushes up.</div>
-          <div class="rep-ring" id="repRing"><div class="rep-count"><b id="repCount">0</b><small>of 8 reps</small></div></div>
+          <div class="cue" id="repCue">Press down. The ground pushes up.</div>
+          <div class="rep-ring" id="repRing"><div class="rep-count"><b id="repCount">0</b><small id="repOf">of 8 reps</small></div></div>
           <button class="primary" data-action="complete-rep">Mark rep complete</button>
           <p class="tiny" style="text-align:center;margin-top:12px">This records completion only. It does not grade your swing.</p>
         </div>
         <div id="completeView" class="complete" hidden>
-          <div class="checkmark">✓</div><span class="overline">Session complete</span><h1>Eight deliberate reps.</h1><p>You completed today’s ground-up sequence.</p>
-          <div class="grid"><article class="card metric"><b>8</b><small>repetitions</small></article><article class="card metric"><b>6m</b><small>practice time</small></article></div>
-          <article class="card" style="text-align:left;margin-bottom:12px"><span class="overline">Reflection</span><h3>What did you feel?</h3><p class="tiny">Demo answer: more stable through transition.</p></article>
-          <button class="primary" data-go="progress">View your progress</button>
+          <div class="checkmark">✓</div><span class="overline">Session complete</span><h1 id="completeTitle">Eight deliberate reps.</h1><p id="completeSub">You completed today’s cue.</p>
+          <article class="card" style="text-align:left;margin:16px 0 12px">
+            <span class="overline">Reflection</span><h3>What did you notice?</h3>
+            <span class="label">Confidence in the cue</span><div class="rating" data-rating="confidence"></div>
+            <span class="label">Pace felt</span><div class="rating" data-rating="pace"></div>
+            <span class="label">Control and balance</span><div class="rating" data-rating="control"></div>
+            <span class="label">One note for Tim</span>
+            <textarea class="field" id="reflectNote" rows="2" placeholder="What changed, what stayed stable, what to review."></textarea>
+          </article>
+          <button class="primary" data-action="save-session">Save and view progress</button>
           <button class="secondary" data-action="reset-session" style="width:100%;margin-top:9px">Practise again</button>
         </div>
       </section>
@@ -149,30 +174,59 @@ h1{font-size:34px;line-height:1.06;letter-spacing:-1.15px;margin:5px 0 10px}h2{f
           <article class="evidence-card"><header><h3>Ground interaction is measurable</h3><span class="claim-badge supported">Supported principle</span></header><p>Ground-reaction forces and centre-of-pressure movement are measurable features of the golf swing. One universal “correct” path is not established.</p><a href="https://pubmed.ncbi.nlm.nih.gov/41653371/" target="_blank" rel="noopener">Systematic review · PMID 41653371 ↗</a><div class="test">Product rule: use a validated pressure or force system before showing force-derived values.</div></article>
           <article class="evidence-card"><header><h3>Foot tripod as a coaching cue</h3><span class="claim-badge hypothesis">Coach hypothesis</span></header><p>The heel, first-metatarsal and fifth-metatarsal tripod is a useful visual model. SwingKai does not claim that maintaining one pressure distribution is optimal for every golfer.</p><a href="https://pubmed.ncbi.nlm.nih.gov/37149899/" target="_blank" rel="noopener">Continuous pressure strategies · PMID 37149899 ↗</a><div class="test">Test against instrumented traces, shot outcome, comfort and between-golfer variability.</div></article>
           <article class="evidence-card"><header><h3>Kinematic sequence needs repeated trials</h3><span class="claim-badge supported">Supported principle</span></header><p>Segment timing can be studied, but single frames and vendor efficiency percentages cannot define a universal swing model.</p><a href="https://pubmed.ncbi.nlm.nih.gov/35736831/" target="_blank" rel="noopener">Kinematics systematic review · PMID 35736831 ↗</a><div class="test">Report curves, event definitions, variability and measurement error rather than one score.</div></article>
+          <article class="evidence-card"><header><h3>Repeated trials, not one swing</h3><span class="claim-badge supported">Supported principle</span></header><p>Biomechanical analysis of a golf swing needs several trials per condition. One frame or one swing cannot define a golfer.</p><a href="https://pubmed.ncbi.nlm.nih.gov/30698499/" target="_blank" rel="noopener">Required number of trials · PMID 30698499 ↗</a><div class="test">Product rule: compare repeated trials at more than one effort level before drawing any pattern.</div></article>
+          <article class="evidence-card"><header><h3>Functional variability is normal</h3><span class="claim-badge supported">Supported principle</span></header><p>Skilled golfers vary. Not every deviation is dysfunction, which is why SwingKai never labels a single rep as wrong.</p><a href="https://pubmed.ncbi.nlm.nih.gov/22900407/" target="_blank" rel="noopener">Movement variability · PMID 22900407 ↗</a><div class="test">Preserve variability in practice design; measure it rather than suppress it.</div></article>
           <article class="evidence-card"><header><h3>Practice cues should preserve learning</h3><span class="claim-badge supported">Supported principle</span></header><p>Short structured practice, an external focus and appropriate variability can support motor learning. Adherence and transfer still need prospective testing.</p><a href="https://pubmed.ncbi.nlm.nih.gov/38419912/" target="_blank" rel="noopener">Motor learning systematic review · PMID 38419912 ↗</a><div class="test">Pilot completion, comprehension and retention without converting self-report into biomechanics.</div></article>
+          <article class="evidence-card"><header><h3>External focus helps</h3><span class="claim-badge supported">Supported principle</span></header><p>Cues about the outcome or the ground tend to outperform cues about body parts. Tim’s “the ground pushes up” is an external cue by design.</p><a href="https://pubmed.ncbi.nlm.nih.gov/37952707/" target="_blank" rel="noopener">External focus in golf · PMID 37952707 ↗</a><div class="test">Keep golfer-facing cues external; keep anatomy in the coach layer.</div></article>
         </div>
         <div class="disclosure">Scientific references support the measurement and learning framework. They do not validate Tim’s entire method or establish clinical, injury-prevention or handicap-improvement claims.</div>
       </section>
 
       <section class="screen" data-screen="progress">
-        <span class="overline">Your progress</span><h1>Consistency, not theatre.</h1><p>Track practice behaviour and reflection before introducing sensor-derived measures.</p>
-        <article class="card progress-card"><div class="trend"><div><span class="overline">Guided reps</span><b id="weeklyReps">24</b></div><span class="up">↑ 8 this week</span></div><div class="chart"><div class="bar" style="height:36%"><span>M</span></div><div class="bar" style="height:18%"><span>T</span></div><div class="bar" style="height:62%"><span>W</span></div><div class="bar" style="height:25%"><span>T</span></div><div class="bar" style="height:78%"><span>F</span></div><div class="bar" style="height:48%"><span>S</span></div><div class="bar" id="todayBar" style="height:10%"><span>S</span></div></div></article>
+        <span class="overline">Your progress</span><h1>Consistency, not theatre.</h1><p>Practice behaviour and your own reflections. Sensor-derived measures come later, with proper instruments.</p>
+        <article class="card progress-card"><div class="trend"><div><span class="overline">Guided reps · last 7 days</span><b id="weeklyReps">0</b></div><span class="up" id="weeklyDelta"></span></div><div class="chart" id="chart"></div></article>
         <div class="section-head"><h2>Practice signals</h2></div>
-        <div class="grid"><article class="card metric"><b>3</b><small>day streak</small></article><article class="card metric"><b>4/5</b><small>self-rated stability</small></article><article class="card full lesson-row"><div class="lesson-icon">◎</div><div><h3>Next focus</h3><p>Confirm the three-arch language with Tim at tomorrow’s lesson.</p></div></article></div>
-        <div class="disclosure">Illustrative demo data. These are practice and self-report measures, not validated biomechanical outcomes.</div>
+        <div class="grid"><article class="card metric"><b id="streak">0</b><small>day streak</small></article><article class="card metric"><b id="stability">–</b><small>self-rated control</small></article><article class="card full lesson-row"><div class="lesson-icon">◎</div><div><h3>Next focus</h3><p id="nextFocus"></p></div></article></div>
+        <div class="section-head"><h2>Reflection log</h2></div>
+        <div class="log" id="reflectLog"></div>
+        <div class="disclosure">Practice and self-report measures recorded on this device. Not validated biomechanical outcomes. Illustrative demo data appears only until your first saved session.</div>
       </section>
 
       <section class="screen" data-screen="coach">
-        <span class="overline">Coach feedback</span><h1>Your coach stays in the loop.</h1>
-        <article class="card coach-card"><div class="coach-avatar">TS</div><h2>Tim Schrader</h2><p class="muted">Schrader Motion · Golf instruction</p><div class="note"><b>Today’s coaching note</b><p>“Stability first. The feet push down and the ground pushes up. Keep the spine organised.”</p></div></article>
-        <div class="section-head"><h2>Method library</h2></div>
-        <div class="method-list">
-          <article class="method-item"><i>1</i><div><h3>Personalised base platform</h3><p>Setup changes with golfer, club and shot intent.</p></div></article>
-          <article class="method-item"><i>2</i><div><h3>Three-arch foot tripod</h3><p>Coach hypothesis for Tim to confirm tomorrow.</p></div></article>
-          <article class="method-item"><i>3</i><div><h3>Ground interaction</h3><p>A practical stability cue, not a measured force result.</p></div></article>
-          <article class="method-item"><i>4</i><div><h3>Club-position baseline</h3><p>Centre for shorter clubs, progressively forward toward driver, then adjust for trajectory.</p></div></article>
+        <div id="coachGolferView">
+          <span class="overline">Coach feedback</span><h1>Your coach stays in the loop.</h1>
+          <article class="card coach-card"><div class="coach-avatar">TS</div><h2>Tim Schrader</h2><p class="muted">Schrader Motion · Golf instruction</p><div class="note"><b>Today’s coaching note</b><p id="coachNoteView"></p></div></article>
+          <div class="section-head"><h2>Your pathway</h2></div>
+          <div class="ledger" id="ledgerGolfer"></div>
+          <div class="section-head"><h2>Method library</h2></div>
+          <div id="methodLibrary"></div>
         </div>
-        <div class="boundary"><b>Review question for Tim:</b> Does Kinetic Swing System preserve how you actually teach this sequence, and what should never be automated?</div>
+        <div id="coachCoachView" class="coach-only" hidden>
+          <span class="overline">Coach view</span><h1>You set the cue. The app keeps it.</h1>
+          <p>Nothing advances without you. Assign one cue, read the golfer’s reflections, approve the next stage when you have seen it.</p>
+          <article class="card" style="margin-bottom:12px">
+            <span class="overline">Golfer</span>
+            <input class="field" id="golferName" placeholder="Golfer name" style="margin:6px 0 10px">
+            <span class="overline">Today’s coaching note</span>
+            <textarea class="field" id="coachNoteEdit" rows="3" style="margin-top:6px"></textarea>
+            <div class="saved" id="noteSaved"></div>
+          </article>
+          <article class="card" style="margin-bottom:12px">
+            <span class="overline">Assign today’s cue</span>
+            <span class="label">Module</span><select class="field" id="assignModule"></select>
+            <span class="label">Mode</span><select class="field" id="assignMode"></select>
+            <span class="label">Repetitions</span><select class="field" id="assignReps"><option>4</option><option>6</option><option selected>8</option></select>
+            <button class="primary" data-action="assign" style="margin-top:14px">Set as today’s session</button>
+            <div class="saved" id="assignSaved"></div>
+          </article>
+          <div class="section-head"><h2>Progression ledger</h2></div>
+          <div class="ledger" id="ledgerCoach"></div>
+          <button class="secondary" data-action="advance" id="advanceBtn" style="width:100%;margin-top:10px">Approve advance to next stage</button>
+          <p class="tiny" id="advanceHint" style="margin-top:8px"></p>
+          <div class="section-head"><h2>Golfer reflections</h2></div>
+          <div class="log" id="coachLog"></div>
+          <div class="boundary" style="margin-top:18px"><b>For your review, Tim:</b> does this preserve how you actually teach the sequence, and what should never be automated? Reset demo data: <button class="secondary" data-action="reset-all" style="min-height:30px;padding:4px 10px;font-size:11px">Clear this device</button></div>
+        </div>
       </section>
     </main>
     <nav class="bottom-nav">
@@ -184,19 +238,97 @@ h1{font-size:34px;line-height:1.06;letter-spacing:-1.15px;margin:5px 0 10px}h2{f
     </nav>
   </section>
 </div>
+
 <script>
 const PASS_SHA='0a11f37d9912c5e33c4d7124c6b763fd022bd1efa08b1dd2e711b2b2320c19f2';
-const gate=document.getElementById('gate'),product=document.getElementById('product'),passcode=document.getElementById('passcode'),gateError=document.getElementById('gateError'),viewport=document.getElementById('viewport');
-async function sha256(text){const data=new TextEncoder().encode(text);const buffer=await crypto.subtle.digest('SHA-256',data);return[...new Uint8Array(buffer)].map(byte=>byte.toString(16).padStart(2,'0')).join('')}
+const STAGES=[
+ {id:'base',title:'Base',focus:'Address, position of strength and centre-balance line.',completion:'Two short practice blocks with comfort and balance recorded.'},
+ {id:'control',title:'Control',focus:'Foot pressure, hip blend and club-position intent.',completion:'Varied drills with one stable cue and one reflection.'},
+ {id:'sequence',title:'Sequence',focus:'Transition, segment order and rhythm before speed.',completion:'Repeated trials at more than one effort level.'},
+ {id:'transfer',title:'Transfer',focus:'Apply one cue to a changing club, shot or target.',completion:'Reviewed with Tim. No automated promotion.'}
+];
+const MODULES=[
+ {id:'foundation',stage:'base',title:'Build the base',promise:'Find a repeatable address position before adding speed.',cue:'Comfortable width. Free to turn.',instruction:'Compare two comfortable stance widths. Notice balance and freedom to turn.',coach:'Joint alignment, stance width and posture are adjustable setup variables, not a prescribed angle.'},
+ {id:'balance-line',stage:'base',title:'Find position of strength',promise:'Organise posture and balance before asking the hips or club to move faster.',cue:'Centred. Free to turn. Able to hold the finish.',instruction:'Three setup rehearsals. Move just enough to feel centred.',coach:'Posture stick and centre-balance line as setup references, not fixed geometry.'},
+ {id:'ground',stage:'control',title:'Own the ground',promise:'Notice where pressure travels before the club moves.',cue:'Press down. The ground pushes up.',instruction:'Slow rehearsals. Notice heel, midfoot and forefoot. Stop if balance goes.',coach:'Links foot pressure, centre of pressure and hip control. Three-arch foot tripod: heel, base of big toe, base of little toe.'},
+ {id:'hips',stage:'control',title:'Blend the hips from the feet',promise:'Coordinate pressure and hip motion.',cue:'Push down through each foot. Let the hips blend.',instruction:'At rehearsal speed alternate right-foot and left-foot pressure. Then remove the cue and swing once.',coach:'A blend of linear and rotational hip motion driven from the feet.'},
+ {id:'transition',stage:'sequence',title:'Keep the transition organised',promise:'Change direction without rushing the club.',cue:'Lower body starts. Structure stays.',instruction:'Half-speed rehearsals. Mark whether the transition felt rushed, balanced or controlled.',coach:'Preserve structure while the lower body begins the change of direction.'},
+ {id:'sequence',stage:'sequence',title:'Sequence, then speed',promise:'Train an order of motion before chasing a larger number.',cue:'Pelvis, torso, arms, club.',instruction:'Rehearse at three effort levels. Notice rhythm and strike.',coach:'Pelvis, torso, arms and club reaching peak speeds in sequence.'},
+ {id:'impact',stage:'sequence',title:'Deliver through impact',promise:'Connect wrist function, segment timing and strike.',cue:'Snap the towel. Accelerate, then release.',instruction:'Soft towel rehearsal away from people. Then short shots, noticing contact only.',coach:'The towel-snap analogy: acceleration followed by deceleration before impact.'},
+ {id:'practice',stage:'transfer',title:'Turn coaching into practice',promise:'Keep Tim’s intent in a short loop you can repeat.',cue:'One cue. Deliberate reps. One note.',instruction:'Choose one cue, complete the reps, then record confidence, pace, control and one note.',coach:'Concept, rehearsal, repetitions, observation and coach review.'},
+ {id:'continual-improvement',stage:'transfer',title:'Build continual improvement',promise:'Progressive, varied and enjoyable practice.',cue:'Vary the club. Keep the cue.',instruction:'Rotate demonstration, animation, reaction and reflection across the week.',coach:'Repetition builds comfort only when the golfer repeats the intended task and the coach can still correct it.'}
+];
+const MODES=[
+ {id:'demonstrate',title:'Demonstration',instruction:'Watch the motion study, name the single cue, then rehearse.'},
+ {id:'animate',title:'Animation',instruction:'Follow the motion study rhythm. Sequence first, speed later.'},
+ {id:'react',title:'Reaction',instruction:'Change club, target or tempo each rep while keeping the cue.'},
+ {id:'reflect',title:'Reflection',instruction:'Rehearse slowly and name what changed and what stayed stable.'}
+];
+const KEY='swingkai_state_v1';
+const defaults=()=>({name:'Zain',role:'golfer',stage:'control',ledger:{base:new Date(Date.now()-6*864e5).toISOString()},assigned:{module:'ground',mode:'demonstrate',reps:8},coachNote:'Stability first. The feet push down and the ground pushes up. Keep the spine organised.',sessions:[]});
+let S=load();function load(){try{const s=JSON.parse(localStorage.getItem(KEY));return s&&s.sessions?Object.assign(defaults(),s):defaults()}catch{return defaults()}}function save(){localStorage.setItem(KEY,JSON.stringify(S))}
+const $=id=>document.getElementById(id);const mod=id=>MODULES.find(m=>m.id===id)||MODULES[2];const mode=id=>MODES.find(m=>m.id===id)||MODES[0];const stageIdx=id=>STAGES.findIndex(s=>s.id===id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const dayKey=d=>{const x=new Date(d);return `${x.getFullYear()}-${x.getMonth()}-${x.getDate()}`};
+const SAMPLE=[6,0,8,4,8,6,0].map((r,i)=>({ts:Date.now()-(6-i)*864e5,module:'ground',mode:'demonstrate',reps:r,confidence:4,pace:3,control:4,note:''})).filter(s=>s.reps);
+
+/* gate */
+const gate=$('gate'),product=$('product'),passcode=$('passcode'),gateError=$('gateError'),viewport=$('viewport');
+async function sha256(text){const data=new TextEncoder().encode(text);const buffer=await crypto.subtle.digest('SHA-256',data);return[...new Uint8Array(buffer)].map(b=>b.toString(16).padStart(2,'0')).join('')}
 async function unlock(){if(await sha256(passcode.value.trim())===PASS_SHA){sessionStorage.setItem('swingkai_preview','1');gate.hidden=true;product.hidden=false;return}gateError.textContent='Incorrect passcode.'}
-document.getElementById('unlock').addEventListener('click',unlock);passcode.addEventListener('keydown',event=>{if(event.key==='Enter')unlock()});if(sessionStorage.getItem('swingkai_preview')==='1'){gate.hidden=true;product.hidden=false}
-function showScreen(name){document.querySelectorAll('[data-screen]').forEach(screen=>screen.classList.toggle('active',screen.dataset.screen===name));document.querySelectorAll('[data-tab]').forEach(tab=>tab.classList.toggle('active',tab.dataset.tab===name));viewport.scrollTop=0}
-document.querySelectorAll('[data-tab]').forEach(tab=>tab.addEventListener('click',()=>showScreen(tab.dataset.tab)));document.querySelectorAll('[data-go]').forEach(button=>button.addEventListener('click',()=>showScreen(button.dataset.go)));
-const planView=document.getElementById('planView'),repView=document.getElementById('repView'),completeView=document.getElementById('completeView'),repCount=document.getElementById('repCount'),repRing=document.getElementById('repRing');let reps=0;
-document.querySelector('[data-action="start-plan"]').addEventListener('click',()=>{showScreen('practice');planView.hidden=false;repView.hidden=true;completeView.hidden=true});
-document.querySelector('[data-action="begin-reps"]').addEventListener('click',()=>{reps=0;repCount.textContent='0';repRing.style.setProperty('--rep-progress','0%');planView.hidden=true;repView.hidden=false;completeView.hidden=true;viewport.scrollTop=0});
-document.querySelector('[data-action="complete-rep"]').addEventListener('click',()=>{reps=Math.min(8,reps+1);repCount.textContent=String(reps);repRing.style.setProperty('--rep-progress',`${reps/8*100}%`);if(reps===8){repView.hidden=true;completeView.hidden=false;document.getElementById('weeklyReps').textContent='32';document.getElementById('todayBar').style.height='94%';viewport.scrollTop=0}});
-document.querySelector('[data-action="reset-session"]').addEventListener('click',()=>{planView.hidden=false;repView.hidden=true;completeView.hidden=true;viewport.scrollTop=0});
+$('unlock').addEventListener('click',unlock);passcode.addEventListener('keydown',e=>{if(e.key==='Enter')unlock()});if(sessionStorage.getItem('swingkai_preview')==='1'){gate.hidden=true;product.hidden=false}
+
+/* navigation */
+function showScreen(name){document.querySelectorAll('[data-screen]').forEach(s=>s.classList.toggle('active',s.dataset.screen===name));document.querySelectorAll('[data-tab]').forEach(t=>t.classList.toggle('active',t.dataset.tab===name));viewport.scrollTop=0}
+document.querySelectorAll('[data-tab]').forEach(t=>t.addEventListener('click',()=>showScreen(t.dataset.tab)));document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>showScreen(b.dataset.go)));
+document.querySelectorAll('[data-role]').forEach(b=>b.addEventListener('click',()=>{S.role=b.dataset.role;save();renderAll();showScreen(S.role==='coach'?'coach':'home')}));
+
+/* home */
+function renderHome(){const h=new Date().getHours();$('greeting').textContent=`${h<12?'Good morning':h<18?'Good afternoon':'Good evening'}, ${S.name}`;$('homeOverline').textContent=new Date().toLocaleDateString(undefined,{weekday:'long',day:'numeric',month:'long'});const m=mod(S.assigned.module),md=mode(S.assigned.mode);$('heroTitle').textContent=m.title+'.';$('heroPromise').textContent=m.promise;$('heroMeta').innerHTML=`<span class="chip">${S.assigned.reps} reps</span><span class="chip">${Math.ceil(S.assigned.reps*0.75)} min</span><span class="chip">${md.title}</span><span class="chip">${STAGES[stageIdx(m.stage)].title} stage</span>`;$('homeCoachNote').textContent=S.coachNote;const w=weekStats();$('homeDays').textContent=w.days;$('homeReps').textContent=w.reps;$('homeRepsLabel').textContent=w.sample?'guided reps · sample week':'guided reps';$('homeSub').textContent=S.sessions.length?`Tim’s cue for today. ${S.sessions.length} session${S.sessions.length===1?'':'s'} saved so far.`:'Tim set today’s cue for you.'}
+
+/* practice */
+let sel={stage:null,module:null,mode:null,reps:null},reps=0;
+function renderPlan(){sel.stage=sel.stage||mod(S.assigned.module).stage;sel.module=sel.module||S.assigned.module;sel.mode=sel.mode||S.assigned.mode;sel.reps=sel.reps||S.assigned.reps;const cur=stageIdx(S.stage);
+ $('stagePills').innerHTML=STAGES.map((s,i)=>`<button class="pill ${s.id===sel.stage?'active':''} ${i>cur?'locked':''} ${S.ledger[s.id]?'done':''}" data-stage="${s.id}">${i<cur?'✓ ':''}${s.title}</button>`).join('');
+ $('stagePills').querySelectorAll('[data-stage]').forEach(b=>b.addEventListener('click',()=>{sel.stage=b.dataset.stage;const first=MODULES.find(m=>m.stage===sel.stage);if(!MODULES.find(m=>m.id===sel.module&&m.stage===sel.stage))sel.module=first.id;renderPlan()}));
+ const si=stageIdx(sel.stage);$('stageFocus').textContent=(si>cur?'Opens when Tim approves the previous stage. ':'')+STAGES[si].focus;
+ $('moduleList').innerHTML=MODULES.filter(m=>m.stage===sel.stage).map((m,i)=>`<div class="plan-step ${m.id===sel.module?'selected':''}" data-module="${m.id}"><div class="step-no">0${MODULES.indexOf(m)+1}</div><div><h3>${esc(m.title)}</h3><p>${esc(m.instruction)}</p></div></div>`).join('');
+ $('moduleList').querySelectorAll('[data-module]').forEach(d=>d.addEventListener('click',()=>{sel.module=d.dataset.module;renderPlan()}));
+ $('modeRow').innerHTML=MODES.map(m=>`<button class="choice ${m.id===sel.mode?'active':''}" data-mode="${m.id}">${m.title}</button>`).join('');$('modeRow').querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>{sel.mode=b.dataset.mode;renderPlan()}));
+ $('repRow').innerHTML=[4,6,8].map(n=>`<button class="choice ${n===sel.reps?'active':''}" data-reps="${n}">${n} reps</button>`).join('');$('repRow').querySelectorAll('[data-reps]').forEach(b=>b.addEventListener('click',()=>{sel.reps=+b.dataset.reps;renderPlan()}));
+ const locked=si>cur;$('beginBtn').textContent=locked?'Locked until Tim approves':`Begin ${sel.reps} guided reps`;$('beginBtn').disabled=locked;$('beginBtn').style.opacity=locked?.5:1}
+const planView=$('planView'),repView=$('repView'),completeView=$('completeView');
+document.querySelector('[data-action="start-plan"]').addEventListener('click',()=>{sel={stage:null,module:null,mode:null,reps:null};renderPlan();showScreen('practice');planView.hidden=false;repView.hidden=true;completeView.hidden=true});
+document.querySelector('[data-action="begin-reps"]').addEventListener('click',()=>{const m=mod(sel.module),md=mode(sel.mode);reps=0;$('repCount').textContent='0';$('repOf').textContent=`of ${sel.reps} reps`;$('repRing').style.setProperty('--rep-progress','0%');$('repMode').textContent=md.title+' mode';$('repTitle').textContent=m.title+'.';$('repInstruction').textContent=md.instruction;$('repCue').textContent=m.cue;planView.hidden=true;repView.hidden=false;completeView.hidden=true;viewport.scrollTop=0});
+document.querySelector('[data-action="complete-rep"]').addEventListener('click',()=>{reps=Math.min(sel.reps,reps+1);$('repCount').textContent=String(reps);$('repRing').style.setProperty('--rep-progress',`${reps/sel.reps*100}%`);if(reps===sel.reps){const words={4:'Four',6:'Six',8:'Eight'};$('completeTitle').textContent=`${words[sel.reps]} deliberate reps.`;$('completeSub').textContent=`${mod(sel.module).title}, ${mode(sel.mode).title.toLowerCase()} mode.`;rating={confidence:0,pace:0,control:0};renderRatings();$('reflectNote').value='';repView.hidden=true;completeView.hidden=false;viewport.scrollTop=0}});
+let rating={confidence:0,pace:0,control:0};
+function renderRatings(){document.querySelectorAll('[data-rating]').forEach(el=>{const k=el.dataset.rating;el.innerHTML=[1,2,3,4,5].map(n=>`<button class="${rating[k]===n?'active':''}" data-v="${n}">${n}</button>`).join('');el.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{rating[k]=+b.dataset.v;renderRatings()}))})}
+document.querySelector('[data-action="save-session"]').addEventListener('click',()=>{S.sessions.push({ts:Date.now(),module:sel.module,mode:sel.mode,reps:sel.reps,confidence:rating.confidence,pace:rating.pace,control:rating.control,note:$('reflectNote').value.trim()});save();renderAll();planView.hidden=false;completeView.hidden=true;showScreen('progress')});
+document.querySelector('[data-action="reset-session"]').addEventListener('click',()=>{planView.hidden=false;repView.hidden=true;completeView.hidden=true;renderPlan();viewport.scrollTop=0});
+
+/* progress */
+function weekStats(list){list=list||(S.sessions.length?S.sessions:SAMPLE);const now=Date.now(),wk=list.filter(s=>now-s.ts<7*864e5),prev=list.filter(s=>now-s.ts>=7*864e5&&now-s.ts<14*864e5);const reps=wk.reduce((a,s)=>a+s.reps,0),prevReps=prev.reduce((a,s)=>a+s.reps,0);const days=new Set(wk.map(s=>dayKey(s.ts))).size;let streak=0;for(let i=0;i<60;i++){const k=dayKey(now-i*864e5);if(list.some(s=>dayKey(s.ts)===k))streak++;else if(i>0)break}const rated=list.filter(s=>s.control);const control=rated.length?(rated.reduce((a,s)=>a+s.control,0)/rated.length):null;return{reps,prevReps,days,streak,control,wk,sample:!S.sessions.length}}
+function renderProgress(){const w=weekStats();$('weeklyReps').textContent=w.reps;$('weeklyDelta').textContent=w.sample?'sample week':w.prevReps?`${w.reps>=w.prevReps?'↑':'↓'} ${Math.abs(w.reps-w.prevReps)} vs last week`:`${w.reps} this week`;const now=Date.now();const bars=[];for(let i=6;i>=0;i--){const t=now-i*864e5,k=dayKey(t);const r=w.wk.filter(s=>dayKey(s.ts)===k).reduce((a,s)=>a+s.reps,0);bars.push({r,l:'MTWTFSS'[(new Date(t).getDay()+6)%7]})}const max=Math.max(8,...bars.map(b=>b.r));$('chart').innerHTML=bars.map(b=>`<div class="bar" style="height:${Math.max(6,b.r/max*100)}%;opacity:${b.r?1:.35}"><span>${b.l}</span></div>`).join('');$('streak').textContent=w.streak;$('stability').textContent=w.control?`${w.control.toFixed(1)}/5`:'–';$('nextFocus').textContent=`${mod(S.assigned.module).title}: ${mod(S.assigned.module).cue} Review with Tim before the next stage.`;
+ const items=[...S.sessions].reverse().slice(0,6);$('reflectLog').innerHTML=items.length?items.map(logItem).join(''):`<div class="empty">No saved sessions yet. Your first session replaces the sample week above.</div>`}
+function logItem(s){const d=new Date(s.ts).toLocaleDateString(undefined,{weekday:'short',day:'numeric',month:'short'});return`<div class="log-item"><div><b>${esc(mod(s.module).title)}</b>${s.reps} reps · ${esc(mode(s.mode).title)}${s.control?` · control ${s.control}/5`:''}</div><span class="tiny">${d}</span>${s.note?`<q>“${esc(s.note)}”</q>`:''}</div>`}
+
+/* coach */
+function ledgerHTML(){const cur=stageIdx(S.stage);return STAGES.map((s,i)=>{const done=i<cur,now=i===cur;const n=S.sessions.filter(x=>mod(x.module).stage===s.id).length;const when=S.ledger[s.id]?new Date(S.ledger[s.id]).toLocaleDateString(undefined,{day:'numeric',month:'short'}):'';return`<div class="ledger-row ${done?'done':''} ${now?'current':''}"><i>${done?'✓':i+1}</i><div><b>${s.title}</b><p>${done?`Approved by Tim ${when}`:now?`Current. ${n} session${n===1?'':'s'} logged.`:'Locked'}</p></div><span class="tiny">${esc(s.completion)}</span></div>`}).join('')}
+function renderCoach(){const coach=S.role==='coach';$('coachGolferView').hidden=coach;$('coachCoachView').hidden=!coach;document.querySelectorAll('[data-role]').forEach(b=>b.classList.toggle('active',b.dataset.role===S.role));
+ $('coachNoteView').textContent='“'+S.coachNote+'”';$('ledgerGolfer').innerHTML=ledgerHTML();$('ledgerCoach').innerHTML=ledgerHTML();
+ $('methodLibrary').innerHTML=STAGES.map(s=>`<div class="module-group"><h3>${s.title}</h3><div class="method-list">${MODULES.filter(m=>m.stage===s.id).map(m=>`<article class="method-item"><i>${MODULES.indexOf(m)+1}</i><div><h3>${esc(m.title)}</h3><p>${esc(m.coach)}</p></div></article>`).join('')}</div></div>`).join('');
+ if(document.activeElement!==$('golferName'))$('golferName').value=S.name;if(document.activeElement!==$('coachNoteEdit'))$('coachNoteEdit').value=S.coachNote;
+ $('assignModule').innerHTML=MODULES.map(m=>`<option value="${m.id}" ${m.id===S.assigned.module?'selected':''}>${STAGES[stageIdx(m.stage)].title} · ${esc(m.title)}</option>`).join('');$('assignMode').innerHTML=MODES.map(m=>`<option value="${m.id}" ${m.id===S.assigned.mode?'selected':''}>${m.title}</option>`).join('');$('assignReps').value=String(S.assigned.reps);
+ const cur=stageIdx(S.stage),n=S.sessions.filter(x=>mod(x.module).stage===S.stage).length;$('advanceBtn').disabled=cur>=STAGES.length-1;$('advanceBtn').textContent=cur>=STAGES.length-1?'Final stage reached':`Approve advance to ${STAGES[cur+1].title}`;$('advanceHint').textContent=cur>=STAGES.length-1?'Transfer is reviewed with the golfer in person.':`${n} session${n===1?'':'s'} logged in ${STAGES[cur].title}. Advancing is your call, not the app’s.`;
+ const items=[...S.sessions].reverse().slice(0,10);$('coachLog').innerHTML=items.length?items.map(logItem).join(''):`<div class="empty">No golfer reflections yet.</div>`}
+$('golferName').addEventListener('input',e=>{S.name=e.target.value.trim()||'Golfer';save();renderHome()});
+$('coachNoteEdit').addEventListener('input',e=>{S.coachNote=e.target.value.trim();save();$('noteSaved').textContent='Saved on this device';renderHome();$('coachNoteView').textContent='“'+S.coachNote+'”'});
+document.querySelector('[data-action="assign"]').addEventListener('click',()=>{S.assigned={module:$('assignModule').value,mode:$('assignMode').value,reps:+$('assignReps').value};save();sel={stage:null,module:null,mode:null,reps:null};renderAll();$('assignSaved').textContent=`Set: ${mod(S.assigned.module).title}, ${S.assigned.reps} reps, ${mode(S.assigned.mode).title.toLowerCase()} mode.`});
+document.querySelector('[data-action="advance"]').addEventListener('click',()=>{const cur=stageIdx(S.stage);if(cur>=STAGES.length-1)return;S.ledger[S.stage]=new Date().toISOString();S.stage=STAGES[cur+1].id;save();sel={stage:null,module:null,mode:null,reps:null};renderAll()});
+document.querySelector('[data-action="reset-all"]').addEventListener('click',()=>{if(confirm('Clear all SwingKai demo data on this device?')){localStorage.removeItem(KEY);S=defaults();sel={stage:null,module:null,mode:null,reps:null};renderAll()}});
+
+function renderAll(){renderHome();renderPlan();renderProgress();renderCoach()}
+renderAll();renderRatings();
 if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js'))}
 </script>
 </body>

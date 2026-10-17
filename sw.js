@@ -1,4 +1,4 @@
-const CACHE = 'swingkai-product-preview-v5';
+const CACHE = 'swingkai-product-preview-v6';
 const SHELL = [
   './',
   './index.html',

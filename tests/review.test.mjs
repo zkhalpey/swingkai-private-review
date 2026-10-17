@@ -68,6 +68,6 @@ test('mobile preview is installable as a standalone PWA', async () => {
   assert.deepEqual(manifest.icons.map(i => i.sizes), ['192x192', '512x512']);
   const sw = await readFile(new URL('../sw.js', import.meta.url), 'utf8');
   assert.match(sw, /manifest\.webmanifest/);
-  assert.match(sw, /swingkai-product-preview-v5/);
+  assert.match(sw, /swingkai-product-preview-v6/);
   assert.doesNotMatch(sw, /source-intake|api\//i);
 });

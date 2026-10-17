@@ -2,13 +2,13 @@
 // Input: wrist/pocket/chest inertial samples. Output: timing facts and coach-style suggestions.
 // Boundary: timing and rhythm from a consumer inertial sensor only. Never force, pressure, centre of pressure,
 // clubface, ball data or a technique score.
-export const ENGINE_VERSION = '0.1.0';
+export const ENGINE_VERSION = '0.2.0';
 export const CONTRACT_FIELDS = ['session_id','batch_sequence','sample_sequence','monotonic_timestamp','orientation','battery_state'];
 export const PLACEMENTS = {
   'lead-wrist': 'Lead wrist (watch or band)',
   'trail-wrist': 'Trail wrist (watch or band)',
-  'trouser-pocket': 'Phone in trouser pocket (pelvis)',
-  'chest-pocket': 'Phone in chest pocket (torso)',
+  'trouser-pocket': 'Phone in trouser pocket (not a calibrated pelvis measurement)',
+  'chest-pocket': 'Phone in chest pocket (not a calibrated torso measurement)',
   'unknown': 'Unknown placement'
 };
 const mag = (x, y, z) => Math.sqrt(x * x + y * y + z * z);
@@ -73,37 +73,36 @@ export function detectSwings(norm, opts = {}) {
 }
 
 /** Build the post-session review. marked_reps = reps the golfer marked complete. */
-export function reviewSession({ samples, placement = 'unknown', source = 'phone', marked_reps = null, module_title = '', cue = '' }) {
+export function reviewSession({ samples, placement = 'unknown', source = 'phone', marked_reps = null }) {
   const norm = normalise(samples);
   const { swings, sample_hz } = detectSwings(norm);
   const n = swings.length;
   const ratios = swings.map(s => s.tempo_ratio), totals = swings.map(s => s.total_s), peaks = swings.map(s => s.peak_rotation_rad_s);
   const facts = { engine_version: ENGINE_VERSION, source, placement, placement_label: PLACEMENTS[placement] || PLACEMENTS.unknown, sample_count: norm.length, sample_hz, recording_s: norm.length ? r2(norm[norm.length - 1].t - norm[0].t) : 0, swings_detected: n, marked_reps, tempo_ratio_mean: r2(mean(ratios)), tempo_ratio_cv: r2(cv(ratios)), total_s_mean: r2(mean(totals)), total_s_cv: r2(cv(totals)), peak_rotation_mean: r2(mean(peaks)), peak_rotation_cv: r2(cv(peaks)) };
   const observations = [], next = [];
-  const boundary = `${facts.placement_label}: timing and rhythm only. Not force, pressure, centre of pressure, clubface or ball data. Not a technique score.`;
-  if (sample_hz && sample_hz < 40) observations.push(`Sensor delivered about ${sample_hz} samples per second. Timing below is coarse; treat differences under 0.1 s as noise.`);
-  if (n === 0) { observations.push('No swing-sized motion was detected. The sensor may not have moved with the body, or the rehearsal was very slow.'); next.push('Check placement and record one full-speed rehearsal to calibrate before judging anything.'); return { facts, swings, observations, next, boundary, quality: 'no_signal' }; }
-  if (marked_reps && n < marked_reps) observations.push(`${n} swings detected against ${marked_reps} reps marked. Some reps were slower than the detection threshold or the sensor was still.`);
-  if (marked_reps && n > marked_reps) observations.push(`${n} movements detected against ${marked_reps} reps marked. Practice swings or waggles may have been counted.`);
-  observations.push(`Average rhythm ${facts.tempo_ratio_mean}:1 (backswing to peak speed), ${facts.total_s_mean} s per swing. Coaches often quote about 3:1 as a reference, not a target.`);
-  let drift = false;
-  const rhythmSteady = facts.total_s_cv <= 0.12 && facts.tempo_ratio_cv <= 0.2;
-  if (rhythmSteady) observations.push('Rhythm was steady across the set. The sequence you rehearsed held from first rep to last.');
-  else if (facts.total_s_cv > 0.2) observations.push(`Swing duration varied by about ${Math.round(facts.total_s_cv * 100)}% rep to rep. The set did not settle into one rhythm.`);
-  else observations.push(`Backswing-to-downswing ratio varied by about ${Math.round(facts.tempo_ratio_cv * 100)}%. Some reps were rushed from the top, others were not.`);
-  if (n >= 4) {
-    const half = Math.floor(n / 2), early = swings.slice(0, half), late = swings.slice(-half);
-    const dRatio = mean(late.map(s => s.tempo_ratio)) - mean(early.map(s => s.tempo_ratio));
-    const dPeak = mean(late.map(s => s.peak_rotation_rad_s)) - mean(early.map(s => s.peak_rotation_rad_s));
-    if (dRatio > 0.4) { drift = true; observations.push('Later reps were quicker from the top than earlier ones: the move to peak speed shortened relative to the backswing.'); next.push(`Next time, hold the transition cue${cue ? ` (“${cue}”)` : ''} for the last half of the set. Count the backswing out loud and let the change of direction wait.`); }
-    else if (dRatio < -0.4) { drift = true; observations.push('Later reps shortened the backswing relative to the move down: the start of the swing got snatchy.'); next.push('Next time, finish the backswing before anything moves down. A one-beat pause at the top for the final reps.'); }
-    if (dPeak > 0.15 * Math.max(0.01, mean(early.map(s => s.peak_rotation_rad_s)))) { drift = true; observations.push('Rotation speed crept up through the set.'); next.push('Speed arrived before the sequence settled. Return to rehearsal speed for the final reps and let Tim decide when to add pace.'); }
+  const boundary = `${facts.placement_label}: experimental movement-event estimates, not validated swing phases, impact or technique. Not force, pressure, centre of pressure, clubface or ball data. A single sensor cannot establish body-segment sequence.`;
+  facts.experimental = true;
+  if (sample_hz && sample_hz < 40) observations.push(`Delivered sample rate: approximately ${sample_hz} Hz. Timing estimates may be coarse.`);
+  if (!n) {
+    observations.push('No candidate movement events were detected. This does not establish whether a swing occurred.');
+    next.push('Check sensor permission, placement and signal delivery. Keep the coach-assigned drill unchanged.');
+    return { facts, swings, observations, next, boundary, quality: 'no_signal' };
   }
-  if (drift && rhythmSteady) { const i = observations.findIndex(o => o.startsWith('Rhythm was steady')); if (i >= 0) observations.splice(i, 1); observations.push('The set started steady and drifted. The first half is the reference; the second half is what to fix.'); }
-  if (!rhythmSteady && !next.length) next.push('Try Animation mode: follow the motion-study rhythm with a two-count backswing, one-count downswing, before adding effort.');
-  if (rhythmSteady && !drift) next.push(n >= 6 ? 'Rhythm held. A sensible next step is Reaction mode: change club or target each rep and see whether the rhythm still holds.' : 'Rhythm held over a short set. Repeat with the full rep count before changing anything.');
-  next.push(`Share this review with Tim. He decides whether the ${module_title || 'module'} cue is landing; the numbers above only describe timing.`);
-  return { facts, swings, observations, next, boundary, quality: rhythmSteady && !drift ? 'steady' : drift ? 'drifting' : 'variable' };
+  observations.push(`${n} candidate movement events detected; ${marked_reps ?? 'unknown'} repetitions marked by the golfer. Waggles and phone handling may count as events.`);
+  observations.push(`Mean estimated onset-to-peak interval: ${facts.total_s_mean} s. Event-interval variation: ${Math.round(facts.total_s_cv * 100)}%.`);
+  observations.push(`Heuristic pre-minimum to post-minimum interval ratio: ${facts.tempo_ratio_mean}:1. These boundaries are not verified backswing or downswing events and have no normative target.`);
+  let drift = false;
+  if (n >= 4) {
+    const half = Math.floor(n / 2);
+    const early = mean(swings.slice(0, half).map(s => s.tempo_ratio));
+    const late = mean(swings.slice(-half).map(s => s.tempo_ratio));
+    drift = Math.abs(late - early) > 0.4;
+    if (drift) observations.push(`Estimated interval ratio changed from ${r2(early)}:1 in the first half to ${r2(late)}:1 in the second. Cause is unknown; this does not diagnose rushing or sequencing.`);
+  }
+  const steady = facts.total_s_cv <= 0.12 && facts.tempo_ratio_cv <= 0.2;
+  next.push('Keep the coach-assigned cue and workload unchanged. Do not alter technique or advance a stage based on this experimental review.');
+  next.push('Compare the candidate event count with the actual repetitions and review any disagreement with Tim. A synchronised reference recording is needed before validating swing phases.');
+  return { facts, swings, observations, next, boundary, quality: drift ? 'drifting' : steady ? 'steady' : 'variable' };
 }
 
 /** Readiness context -> workload suggestion. Never changes the cue or module. */

@@ -1,7 +1,8 @@
-const CACHE = 'swingkai-product-preview-v4';
+const CACHE = 'swingkai-product-preview-v5';
 const SHELL = [
   './',
   './index.html',
+  './swing-review.js',
   './manifest.webmanifest',
   './icons/icon-192.png',
   './icons/icon-512.png',
